@@ -6,8 +6,11 @@ PlatformerGame.Logo = function(){};
 PlatformerGame.Logo.prototype = {
   create: function() {
 
+    this.scoreText = this.game.add.text(200, 500, 'Use arrowkeys to stay alive...', { fontSize: '32px', fill: '#fff' });
+
+
     //Change the background colour
-    this.game.stage.backgroundColor = "#333";
+    this.game.stage.backgroundColor = "#312";
 
     this.platforms = this.game.add.group();
 
@@ -163,7 +166,7 @@ PlatformerGame.Logo.prototype = {
 
     this.createTile(logo_top_x+16*1, logo_top_y+16*9, 2);
 
-    this.startLogoAnimationTimer = 100; 
+    this.startLogoAnimationTimer = 200; 
   
     this.game.input.keyboard.addCallbacks(this, this.skip, null, null);
     this.pressed = false;

@@ -5,9 +5,22 @@ PlatformerGame.Game = function(){};
 
 PlatformerGame.Game.prototype = {
     create: function() {
+        this.game.stage.backgroundColor = "#000";
 
-        //  A simple background for our game
-        //this.game.add.sprite(0, 0, 'sky');
+        this.game.camera.follow(this.player);
+
+        this.powerUps = this.game.add.group();
+        this.powerUps.enableBody = true;
+        //  Finally some stars to collect
+        this.stars = this.game.add.group();
+        //  We will enable physics for any star that is created in this group
+        this.stars.enableBody = true;
+
+        this.explosions = this.game.add.group();
+
+        this.enemies = this.game.add.group();
+        this.enemies.enableBody = true;
+
         this.players = this.game.add.group();
         
         this.player = this.players.create(400, 400, 'ship');
@@ -17,24 +30,7 @@ PlatformerGame.Game.prototype = {
 
         this.player.anchor.setTo(0.5);
         this.player.body.collideWorldBounds = true;
-
-        this.game.camera.follow(this.player);
-
         this.reset();
-
-        this.enemies = this.game.add.group();
-        this.enemies.enableBody = true;
-
-
-        this.powerUps = this.game.add.group();
-        this.powerUps.enableBody = true;
-        //  Finally some stars to collect
-        this.stars = this.game.add.group();
-
-        this.explosions = this.game.add.group();
-
-        //  We will enable physics for any star that is created in this group
-        this.stars.enableBody = true;
         
         this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACE);
         this.rKey = this.game.input.keyboard.addKey(Phaser.Keyboard.R);
@@ -43,6 +39,7 @@ PlatformerGame.Game.prototype = {
         this.music = this.game.add.audio('music');
         this.music.loop = true;
         this.music.play();
+        this.music.volume = 0.6;
         
 
         //  The score
@@ -147,6 +144,8 @@ PlatformerGame.Game.prototype = {
 
         if (this.timer % 10 == 0) {
             this.spawnStars(this.game.rnd.integerInRange(1,10));
+            this.game.world.bringToTop(this.enemies);
+            this.game.world.bringToTop(this.player);
         }
         if (this.timer % 100 == 0 || this.game.rnd.integerInRange(1,30000) < this.timer ) {
             this.spawnEnemy();

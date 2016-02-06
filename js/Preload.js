@@ -12,10 +12,7 @@ PlatformerGame.Preload.prototype = {
     this.load.setPreloadSprite(this.preloadBar);
 
     this.game.load.spritesheet('logo-tiles', 'assets/images/logo-tiles.png', 17, 16);
-    this.game.load.spritesheet('tiles', 'assets/images/bitslap-minild62.png', 16, 16);
-    this.load.tilemap('level1', 'assets/tilemaps/level1.json', null, Phaser.Tilemap.TILED_JSON);
-    this.game.load.image('sky', 'assets/images/sky_new.png');
-    this.game.load.image('star', 'assets/images/B13.png');
+    
     this.game.load.image('ship', 'assets/images/A5.png');
     this.game.load.image('enemy1', 'assets/images/B6.png');
     this.game.load.image('enemy2', 'assets/images/C7.png');
@@ -36,6 +33,6 @@ PlatformerGame.Preload.prototype = {
 
   },
   create: function() {
-    this.state.start('Game');
+    this.state.start('Logo');
   }
 };
