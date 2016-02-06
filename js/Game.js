@@ -24,14 +24,14 @@ PlatformerGame.Game.prototype = {
         this.players = this.game.add.group();
         
         this.player = this.players.create(400, 400, 'ship');
-        this.player.scale.setTo(1, -1);
+        this.player.scale.setTo(0.5, -0.5);
 
         this.game.physics.arcade.enable(this.player);
 
         this.player.anchor.setTo(0.5);
         this.player.body.collideWorldBounds = true;
         this.reset();
-        
+              
         this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACE);
         this.rKey = this.game.input.keyboard.addKey(Phaser.Keyboard.R);
         this.rKey.onDown.add(this.reset, this);
@@ -83,7 +83,7 @@ PlatformerGame.Game.prototype = {
             enemy.body.velocity.x = this.game.rnd.integerInRange(0,300) + this.timer/100;
         }
 
-
+enemy.scale.setTo(0.5);
     },
 
     spawnStars: function(number) {
@@ -97,7 +97,7 @@ PlatformerGame.Game.prototype = {
             star.scale.setTo(0.5);
 
             //  Let gravity do its thing
-            star.body.velocity.y = 300 + this.game.rnd.integerInRange(10,300);
+            star.body.velocity.y = 300 + this.game.rnd.integerInRange(10, 200+this.timer/10);
             
             
         }
@@ -107,7 +107,7 @@ PlatformerGame.Game.prototype = {
     explode: function(player, enemy) {
         var starfoo = 'explosion' + this.game.rnd.integerInRange(2,3);
 
-        var explode = this.explosions.create(enemy.body.x - 40, enemy.body.y - 10, starfoo);        
+        var explode = this.explosions.create(enemy.body.x - 80, enemy.body.y - 60, starfoo);        
         explode.animations.add('bang', [0,1,2,3,4,5,6,7,8,9,10,11,12,], 10, false);
         explode.animations.play('bang');
         explode.anchor.setTo(0, 0);
@@ -117,7 +117,7 @@ PlatformerGame.Game.prototype = {
     explode2: function(enemy1, enemy) {
         var starfoo = 'explosion2'; // + this.game.rnd.integerInRange(1,3);
 
-        var explode = this.explosions.create(enemy.body.x - 40, enemy.body.y - 10, starfoo);        
+        var explode = this.explosions.create(enemy.body.x - 80, enemy.body.y - 60, starfoo);        
         explode.animations.add('bang', [0,1,2,3,4,5,6,7,8,9,10,11,12,], 10, false);
         explode.animations.play('bang');
         explode.anchor.setTo(0, 0);
@@ -125,7 +125,7 @@ PlatformerGame.Game.prototype = {
 
         var starfoo = 'explosion3'; // + this.game.rnd.integerInRange(1,3);
 
-        var explode = this.explosions.create(enemy1.body.x - 40, enemy1.body.y - 10, starfoo);        
+        var explode = this.explosions.create(enemy1.body.x - 80, enemy1.body.y - 60, starfoo);        
         explode.animations.add('bang', [0,1,2,3,4,5,6,7,8,9,10,11,12,], 10, false);
         explode.animations.play('bang');
         explode.anchor.setTo(0, 0);
@@ -152,7 +152,7 @@ PlatformerGame.Game.prototype = {
         }
         //  Collide the player and the stars with the platforms
         this.game.physics.arcade.collide(this.player, this.enemies, this.death, this.isVisible, this);
-        this.game.physics.arcade.collide(this.enemies, this.enemies, this.explode2, this.isVisible, this);
+        this.game.physics.arcade.collide(this.enemies, this.enemies, this.explode2, null, this);
         //this.game.physics.arcade.collide(this.stars, this.blockedLayer);
 
         //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
@@ -211,7 +211,7 @@ PlatformerGame.Game.prototype = {
     death: function(player, enemy) {
         var starfoo = 'explosion1'; // + this.game.rnd.integerInRange(1,3);
 
-        var explode = this.explosions.create(player.body.x - 40, player.body.y - 20, starfoo);        
+        var explode = this.explosions.create(player.body.x - 80, player.body.y - 60, starfoo);        
         explode.animations.add('bang', [0,1,2,3,4,5,6,7,8,9,10,11,12,], 10, false);
         explode.animations.play('bang');
         explode.anchor.setTo(0, 0);
