@@ -6,7 +6,9 @@ PlatformerGame.Logo = function(){};
 PlatformerGame.Logo.prototype = {
   create: function() {
 
-    this.scoreText = this.game.add.text(200, 500, 'Use arrowkeys to stay alive...', { fontSize: '32px', fill: '#fff' });
+    this.scoreText = this.game.add.text(150, 100, 'In space, noone can hear you die', { fontSize: '32px', fill: '#333' });
+
+    this.scoreText = this.game.add.text(180, 500, 'Use arrowkeys to stay alive...', { fontSize: '32px', fill: '#333' });
 
 
     //Change the background colour
